@@ -31,4 +31,40 @@ async function petsArea() {
     })
     document.querySelector(".list-of-pets").appendChild(wrapper)
 }
+
 petsArea()
+
+function createAgeText(birthYear) {
+    const currentYear = new Date().getFullYear()
+    const age = currentYear - birthYear
+
+    if (age == 1) return "1 year old"
+    if (age == 0) return "Less than a year old"
+
+    return `${age} years old`
+}
+
+// pet filter button code
+const allButtons = document.querySelectorAll(".pet-filter button")
+
+allButtons.forEach(el => {
+    el.addEventListener("click", handleButtonClick)
+})
+
+function handleButtonClick(e) {
+    // remove active class from any and all buttons
+    allButtons.forEach(el => el.classList.remove("active"))
+
+    // add active class to the specific button that just got clicked
+    e.target.classList.add("active")
+
+    // actually filter the pets down below
+    const currentFilter = e.target.dataset.filter
+    document.querySelectorAll(".pet-card").forEach(el => {
+        if (currentFilter == el.dataset.species || currentFilter == "all") {
+            el.style.display = "grid"
+        } else {
+            el.style.display = "none"
+        }
+    })
+}
