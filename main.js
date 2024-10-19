@@ -7,7 +7,6 @@ async function start() {
 
   const ourTemperature = weatherData.properties.periods[0].temperature
   document.querySelector("#temperature-output").textContent = ourTemperature
-
 }
 
 start()
